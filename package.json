@@ -1,0 +1,40 @@
+{
+  "name": "react-hydratable",
+  "description": "hold-on DOM structure for improving React SEO",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "NamGungGeon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NamGungGeon/react-hydratable"
+  },
+  "keywords": [
+    "react",
+    "static",
+    "seo",
+    "build",
+    "html",
+    "csr",
+    "ssr-like",
+    "skeleton"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "puppeteer": "^13.5.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "preview": "node index.js --preview",
+    "format": "prettier --write */**.js*",
+    "precommit": "npm run format"
+  },
+  "bin": {
+    "react-hydratable": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "src/"
+  ]
+}
