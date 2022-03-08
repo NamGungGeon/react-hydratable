@@ -1,7 +1,7 @@
 {
   "name": "react-hydratable",
   "description": "hold-on DOM structure for improving React SEO",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
   "author": "NamGungGeon",
@@ -19,10 +19,11 @@
     "ssr-like",
     "skeleton"
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "prettier": "^2.5.1",
+  "dependencies": {
     "puppeteer": "^13.5.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   },
   "scripts": {
     "start": "node index.js",
