@@ -16,6 +16,10 @@
     "build",
     "html",
     "csr",
+    "ssr",
+    "prerender",
+    "prerenderer",
+    "prerendering",
     "ssr-like",
     "skeleton"
   ],
