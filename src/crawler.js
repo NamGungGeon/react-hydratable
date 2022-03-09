@@ -82,7 +82,6 @@ const startCrawler = async (host, urls, outputRoot, delayTime, userAgent) => {
   }
   await browser.close();
 
-  if (onFinished) onFinished();
   console.log('Crawling: end');
 };
 
