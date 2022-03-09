@@ -33,7 +33,6 @@ const createHttpServer = (webroot, port, onReady) => {
     }
   });
 
-  // 웹서버를 시작하여 지정 포트에서 대기하도록 설정
   server.listen(port, function () {
     console.log(`createHttpServer: ready (PORT ${port})`);
     if (onReady) onReady();
