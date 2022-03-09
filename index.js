@@ -3,26 +3,27 @@
 const createHttpServer = require('./src/webserver');
 const startCrawler = require('./src/crawler');
 
-const params = require('./src/params');
+const config = require('./src/config');
 
 const args = process.argv.slice(2);
 
 if (args.includes('--preview')) {
   //preview mode
-  createHttpServer(params.webroot, params.port);
+  createHttpServer(config.webroot, config.port);
   return;
 }
 
 //crawling mode
-const closeHttpServer = createHttpServer(params.webroot, params.port, () =>
+const closeHttpServer = createHttpServer(config.webroot, config.port, () =>
   startCrawler(
-    params.host + ':' + params.port,
-    params.crawlingUrls,
-    params.webroot,
-    params.delay
+    config.host + ':' + config.port,
+    config.crawlingUrls,
+    config.webroot,
+    config.delay,
+    config.userAgent
   )
     .catch((e) => {
-      console.error('Crawling: error\n', e);
+      console.error('Crawling: [error]\n', e);
     })
     .finally(closeHttpServer)
 );

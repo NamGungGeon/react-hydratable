@@ -21,12 +21,13 @@ const createDirs = (dirPath) => {
   }
 };
 
-const startCrawler = async (host, urls, outputRoot, delayTime, onFinished) => {
+const startCrawler = async (host, urls, outputRoot, delayTime, userAgent) => {
   console.log('Crawling: start');
   const browser = await puppeteer.launch({
     args: ['--disable-web-security'],
   });
   const page = await browser.newPage();
+  await page.setUserAgent(userAgent);
 
   const nextUrl = createUrlIterator(host, urls);
 
@@ -38,10 +39,18 @@ const startCrawler = async (host, urls, outputRoot, delayTime, onFinished) => {
 
     await delay(delayTime);
 
-    // Get the "viewport" of the page, as reported by the page.
     const htmlString = await page.evaluate(() => {
+      if (document.contentType !== 'text/html') {
+        return {
+          error: 'page is not text/html type',
+        };
+      }
       return document.documentElement.innerHTML;
     });
+    if (htmlString.error) {
+      console.error(`Crawling: [Error] ${url} ${htmlString.error}`);
+      break;
+    }
 
     let path = url.replace(host, '');
     if (path[path.length - 1] === '/') {
@@ -73,7 +82,6 @@ const startCrawler = async (host, urls, outputRoot, delayTime, onFinished) => {
   }
   await browser.close();
 
-  if (onFinished) onFinished();
   console.log('Crawling: end');
 };
 
