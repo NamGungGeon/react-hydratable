@@ -39,10 +39,18 @@ const startCrawler = async (host, urls, outputRoot, delayTime, userAgent) => {
 
     await delay(delayTime);
 
-    // Get the "viewport" of the page, as reported by the page.
     const htmlString = await page.evaluate(() => {
+      if (document.contentType !== 'text/html') {
+        return {
+          error: 'page is not text/html type',
+        };
+      }
       return document.documentElement.innerHTML;
     });
+    if (htmlString.error) {
+      console.error(`Crawling: [Error] ${url} ${htmlString.error}`);
+      break;
+    }
 
     let path = url.replace(host, '');
     if (path[path.length - 1] === '/') {
