@@ -26,20 +26,20 @@ Now every search bot(that cannot execute javascript, just read html file) can co
 2. setup
    Go to your project root and open `src/index.js`
 
-```
-import React from "react";
-import { hydrate, render } from "react-dom";
+   ```javascript
+   import React from 'react';
+   import { hydrate, render } from 'react-dom';
 
-// ...
+   // ...
 
-//update here
-//optional render/hydrate
-if (rootElement.hasChildNodes()) {
-  hydrate(element, rootElement);
-} else {
-  render(element, rootElement);
-}
-```
+   //update here
+   //optional render/hydrate
+   if (rootElement.hasChildNodes()) {
+     hydrate(element, rootElement);
+   } else {
+     render(element, rootElement);
+   }
+   ```
 
 If user access crawled page, `???/html` has been filled body. So browser need not break all DOM and re-render all elements.
 
@@ -53,7 +53,7 @@ That's all! `react-hydratable` is ready!!
 
 Add `react-hydratable` script to your `package.json`.
 
-```
+```json
 // package.json
 
 //...
@@ -73,11 +73,33 @@ You just type `npm run build` to terminal.
 
 `react-hydratable` will be executed automatically after building project.
 
+## Preview prerendered pages
+
+Do you wonder your prerendered pages are working correctly?
+
+`react-hydratable` support "preview mode".
+
+```json
+// package.json
+
+//...
+ "scripts": {
+     //...
+     "postbuild":"react-hydratable",
+
+     //add new script
+     "preview": "react-hydratable"
+  },
+//...
+```
+
+Now, you can check your prerendered pages after type `npm run preview` to terminal.
+
 ## (Optional) Customize configurations
 
 react-hydratable has default config.
 
-```
+```json
 {
   webroot: process.cwd() + '/build',
   host: 'http://localhost',
@@ -91,10 +113,10 @@ If you want customize settings(ex: I want to crawl html about more url), create 
 
 #### Set crawling targets(urls)
 
-```
+```json
 //hydratable.config.json
 {
-    crawlingUrls: ['/', '/copyrights']
+  "crawlingUrls": ["/", "/copyrights"]
 }
 ```
 
@@ -103,6 +125,9 @@ As this configuration, `react-hydratable` start crawling about '/' and '/copyrig
 And also, create new html file(`/build/copyrights/index.html`) and refresh default index.html file(`/build/index.html`).
 
 Default `crawlingUrls` value is `['/']` (only crawling `/build/index.html` and refresh it)
+
+**Keep in mind "all type of crawlingUrl must be text/html"**
+**Other Content-Type is not accepted**
 
 #### Set crawling delay
 
@@ -118,10 +143,10 @@ Default waiting time is `1500`ms.
 
 If you want increase delay from 1500ms to 2000ms, override `delay` property.
 
-```
+```json
 //hydratable.config.json
 {
-    delay: 2000
+  "delay": 2000
 }
 ```
 
@@ -129,12 +154,13 @@ Now `react-hydratable` wait 2000 ms after loading page.
 
 #### All configurations
 
-```
+```json
 {
-  webroot: projectroot+ '/build', //react build directory
-  host: 'http://localhost', //webserver host
-  port: 3000, //webserver port
-  crawlingUrls: ['/'], //crawling target urls
-  delay: 1500, //wait time after page is loaded
+  "webroot": "/your_project_root/build", //react build directory
+  "host": "http://localhost", //webserver host
+  "port": 3000, //webserver port
+  "crawlingUrls": ["/"], //crawling target urls
+  "delay": 1500, //wait time after page is loaded
+  "userAgent": "react-hydratable" //crawler user-agent (request header)
 }
 ```
