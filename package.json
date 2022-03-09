@@ -1,7 +1,7 @@
 {
   "name": "react-hydratable",
   "description": "hold-on DOM structure for improving React SEO",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "license": "MIT",
   "author": "NamGungGeon",
