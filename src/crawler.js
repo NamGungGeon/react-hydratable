@@ -21,12 +21,13 @@ const createDirs = (dirPath) => {
   }
 };
 
-const startCrawler = async (host, urls, outputRoot, delayTime, onFinished) => {
+const startCrawler = async (host, urls, outputRoot, delayTime, userAgent) => {
   console.log('Crawling: start');
   const browser = await puppeteer.launch({
     args: ['--disable-web-security'],
   });
   const page = await browser.newPage();
+  await page.setUserAgent(userAgent);
 
   const nextUrl = createUrlIterator(host, urls);
 

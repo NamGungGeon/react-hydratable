@@ -9,6 +9,7 @@ const params = {
   port: 3000,
   crawlingUrls: ['/'],
   delay: 1500,
+  userAgent: 'react-hydratable',
 };
 
 try {
