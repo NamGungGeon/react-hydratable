@@ -88,7 +88,7 @@ Do you wonder your prerendered pages are working correctly?
      "postbuild":"react-hydratable",
 
      //add new script
-     "preview": "react-hydratable"
+     "preview": "react-hydratable --preview"
   },
 //...
 ```
