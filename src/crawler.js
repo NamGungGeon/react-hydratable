@@ -21,7 +21,14 @@ const createDirs = (dirPath) => {
   }
 };
 
-const startCrawler = async (host, urls, outputRoot, delayTime, userAgent) => {
+const startCrawler = async (
+  host,
+  urls,
+  outputRoot,
+  delayTime,
+  userAgent,
+  htmlPrefix
+) => {
   console.log('Crawling: start');
   const browser = await puppeteer.launch({
     args: ['--disable-web-security'],
@@ -71,7 +78,7 @@ const startCrawler = async (host, urls, outputRoot, delayTime, userAgent) => {
 
     createDirs(outputDir);
 
-    fs.writeFile(outputPath, htmlString, (e) => {
+    fs.writeFile(outputPath, htmlPrefix + htmlString, (e) => {
       if (e)
         console.error(
           'Crawling: Cannot write crawler output file to webroot path\n',
