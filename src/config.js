@@ -10,6 +10,7 @@ const params = {
   crawlingUrls: ['/'],
   delay: 1500,
   userAgent: 'react-hydratable',
+  htmlPrefix: '<!DOCTYPE html>',
 };
 
 try {
