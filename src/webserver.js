@@ -17,6 +17,7 @@ const createHttpServer = (webroot, port, onReady) => {
     }
 
     path = webroot + path;
+    path = decodeURI(path);
 
     try {
       //static page or crawled page
