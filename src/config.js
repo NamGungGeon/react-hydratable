@@ -31,8 +31,8 @@ try {
     if (!params.host || typeof params.host !== 'string') {
       throw 'host must be non-empty string';
     }
-    if (params.port <= 0 && params.port !== '') {
-      throw 'port must be bigger than 0 or empty string';
+    if (params.port <= 0) {
+      throw 'port must be bigger than 0';
     }
     if (!Array.isArray(params.crawlingUrls)) {
       throw 'crawlingUrls must be string array';
