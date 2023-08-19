@@ -63,20 +63,47 @@ const startCrawler = async (
   outputRoot,
   delayTime,
   userAgent,
-  htmlPrefix
+  htmlPrefix,
+  pageCount
 ) => {
   console.log('Crawling: start');
 
   const browser = await puppeteer.launch({
     args: ['--disable-web-security'],
   });
-  const page = await browser.newPage();
-  await page.setUserAgent(userAgent);
 
-  for (const pathname of urls) {
-    const url = host + pathname;
-    await crawlingOnePage(page, url, host, outputRoot, delayTime, htmlPrefix);
-  }
+  const pathnames = urls.slice();
+  const getNextFullUrl = () => {
+    const pathname = pathnames.shift();
+    if (!pathname) {
+      return null;
+    }
+    return host + pathname;
+  };
+
+  //use multi page
+  await Promise.all(
+    Array(pageCount)
+      .fill(0)
+      .map(() => {
+        return new Promise(async (rs) => {
+          const page = await browser.newPage();
+          await page.setUserAgent(userAgent);
+
+          while ((url = getNextFullUrl())) {
+            await crawlingOnePage(
+              page,
+              url,
+              host,
+              outputRoot,
+              delayTime,
+              htmlPrefix
+            );
+          }
+          rs();
+        });
+      })
+  );
 
   await browser.close();
 
