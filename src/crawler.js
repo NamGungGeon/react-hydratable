@@ -11,7 +11,7 @@ const crawlingOnePage = async (
   htmlPrefix
 ) => {
   console.log('Crawling: [Start] ', url);
-  await page.goto(url);
+  await page.goto(url, { timeout: 10 * 1000 });
 
   await delay(delayTime);
 
