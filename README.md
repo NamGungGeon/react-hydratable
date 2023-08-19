@@ -159,6 +159,20 @@ If you want increase delay from 1500ms to 2000ms, override `delay` property.
 
 Now `react-hydratable` wait 2000 ms after loading page.
 
+### Set multi-page crawling
+
+If you have a lot of page that will be crawling(crawlingUrls), it takes many time.
+
+In this case, you can use multi-page crawling.
+
+Default value is 1, this means one page(one window) is used to crawl your `crawlingUrls`.
+
+You can increase page(window) count as increase `pageCount` value.
+
+But if `pageCount` gets too big, server may be slow and also crawling result be wrong.
+
+Recommend set between 1~4.
+
 ### All configurations
 
 ```json
@@ -169,7 +183,8 @@ Now `react-hydratable` wait 2000 ms after loading page.
   "crawlingUrls": ["/"],
   "delay": 1500,
   "userAgent": "react-hydratable",
-  "htmlPrefix": "<!DOCTYPE html>"
+  "htmlPrefix": "<!DOCTYPE html>",
+  "pageCount": 1
 }
 ```
 
@@ -186,3 +201,5 @@ Now `react-hydratable` wait 2000 ms after loading page.
 `userAgent`: crawler user-agent (request header)
 
 `htmlPrefix`: prefix string that is added crawling result (if blank, `<!DOCTYPE html>` is not included)
+
+`pageCount`: multi-page crawling is support. if you increase this value, crawling speed is up, but may stress to server.
