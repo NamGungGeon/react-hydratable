@@ -1,13 +1,6 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
-const { delay, iife } = require('./utils');
-
-const createDirs = (dirPath) => {
-  const isExists = fs.existsSync(dirPath);
-  if (!isExists) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-};
+const { delay, iife, createDirs } = require('./utils');
 
 const crawlingOnePage = async (
   page,
