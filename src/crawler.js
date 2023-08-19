@@ -48,12 +48,14 @@ const crawlingOnePage = async (
   createDirs(outputDir);
 
   fs.writeFile(outputPath, htmlPrefix + htmlString, (e) => {
-    if (e)
+    if (e) {
       console.error(
-        'Crawling: Cannot write crawler output file to webroot path\n',
+        'Crawling: [Error] Cannot write crawler output file to webroot path\n',
         e
       );
-    else console.log(`Crawling: [OK] ${url}`);
+    } else {
+      console.log(`Crawling: [Finished] ${url}`);
+    }
   });
 };
 
